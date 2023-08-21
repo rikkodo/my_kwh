@@ -8,10 +8,11 @@ KillerWhaleの自分用ファームウェア
 
 * Keyboard Quantizer用のMASTER\_LEFT化
   * 起動後にbootを押下すれば良いらしいが、ファーム書くならこっちの方が楽
+* スクロール中はマウスレイヤ変更を受け付けないようにする
+  * <https://github.com/qmk/qmk_firmware/blob/master/docs/feature_pointing_device.md#adding-mouse-keys>
 
 やりたいこと
 
-* スクロール中はマウスレイヤ変更を受け付けないようにする
 * LCDにレイヤ情報、モディファイアキー情報を表示する
 
 ## 参照
