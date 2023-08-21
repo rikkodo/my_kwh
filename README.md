@@ -1,13 +1,16 @@
 # Killer Whale
 
-
 ## About
 
 KillerWhaleの自分用ファームウェア
 
-やりたいこと
+以下に対応
 
 * Keyboard Quantizer用のMASTER\_LEFT化
+  * 起動後にbootを押下すれば良いらしいが、ファーム書くならこっちの方が楽
+
+やりたいこと
+
 * スクロール中はマウスレイヤ変更を受け付けないようにする
 * LCDにレイヤ情報、モディファイアキー情報を表示する
 
@@ -24,4 +27,3 @@ KillerWhaleの自分用ファームウェア
 1. qmk環境を構築する (0.21.6で動作を確認)
 2. <qmk\_firmware>/keyboardsにkillerwhaleという名前で本ディレクトリへのシンボリックリンクを貼る
 3. <qmk\_firmware>下で、`make killerwhale/duo:ballright`
-
