@@ -1,24 +1,7 @@
 {
   "name": "Killer Whale DUO",
   "vendorProductId": 2290354329,
-  "macros": [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  ],
+  "macros": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
   "layers": [
     [
       "KC_NO",
@@ -27,7 +10,7 @@
       "KC_3",
       "KC_2",
       "KC_1",
-      "MT(MOD_LGUI | MOD_RGUI,KC_ENT)",
+      "CUSTOM(76)",
       "MT(MOD_LSFT,KC_GRV)",
       "KC_NO",
       "KC_T",
@@ -1023,340 +1006,100 @@
   ],
   "encoders": [
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_BSPC",
-        "KC_TAB"
-      ],
-      [
-        "KC_BRIU",
-        "KC_BRID"
-      ],
-      [
-        "KC_MS_WH_LEFT",
-        "KC_MS_WH_RIGHT"
-      ],
-      [
-        "RGB_SAI",
-        "RGB_SAD"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_BSPC", "KC_TAB"],
+      ["KC_BRIU", "KC_BRID"],
+      ["KC_MS_WH_LEFT", "KC_MS_WH_RIGHT"],
+      ["RGB_SAI", "RGB_SAD"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ],
     [
-      [
-        "KC_MS_WH_UP",
-        "KC_MS_WH_DOWN"
-      ],
-      [
-        "KC_VOLU",
-        "KC_VOLD"
-      ],
-      [
-        "KC_MS_WH_UP",
-        "KC_MS_WH_DOWN"
-      ],
-      [
-        "RGB_VAI",
-        "RGB_VAD"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ],
-      [
-        "KC_NO",
-        "KC_NO"
-      ]
+      ["KC_MS_WH_UP", "KC_MS_WH_DOWN"],
+      ["KC_VOLU", "KC_VOLD"],
+      ["KC_MS_WH_UP", "KC_MS_WH_DOWN"],
+      ["RGB_VAI", "RGB_VAD"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO"]
     ]
   ]
 }
