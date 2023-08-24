@@ -53,7 +53,8 @@ enum my_ball_keycodes
 #define OBLIQUE_DEFAULT 5
 #define CPI_OPTION_SIZE (sizeof(cpi_array) / sizeof(uint16_t))
 #define ANGLE_OPTION_SIZE (sizeof(angle_array) / sizeof(uint16_t))
-#define SCROLL_DIVISOR 150.0
+// TODO 可変にする
+#define SCROLL_DIVISOR 60
 
 typedef union
 {
@@ -77,8 +78,8 @@ ballconfig_t ballconfig;
 uint16_t cpi_array[] = CPI_OPTIONS;
 uint16_t angle_array[] = ANGLE_OPTIONS;
 bool scrolling;
-float scroll_accumulated_h;
-float scroll_accumulated_v;
+int8_t scroll_accumulated_h;
+int8_t scroll_accumulated_v;
 uint8_t pre_layer;
 uint8_t cur_layer;
 bool oled_mode;
@@ -182,21 +183,18 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report)
             }
         }
 
-        mouse_report.h = x_rev;
-        mouse_report.v = y_rev;
+        scroll_accumulated_h += x_rev;
+        scroll_accumulated_v += y_rev;
+        mouse_report.h = scroll_accumulated_h / SCROLL_DIVISOR;
+        mouse_report.v = scroll_accumulated_v / SCROLL_DIVISOR;
+        scroll_accumulated_h %= SCROLL_DIVISOR;
+        scroll_accumulated_v %= SCROLL_DIVISOR;
+
         if (!ballconfig.inv_sc)
         {
-
             mouse_report.h = -1 * mouse_report.h;
             mouse_report.v = -1 * mouse_report.v;
         }
-
-        scroll_accumulated_h += (float)mouse_report.h / SCROLL_DIVISOR;
-        scroll_accumulated_v += (float)mouse_report.v / SCROLL_DIVISOR;
-        mouse_report.h = (int8_t)scroll_accumulated_h;
-        mouse_report.v = (int8_t)scroll_accumulated_v;
-        scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
-        scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
 
         mouse_report.x = 0;
         mouse_report.y = 0;
