@@ -25,11 +25,32 @@ enum ball_keycodes
     OLED_MOD
 };
 
+// 自作エリア
+enum my_ball_keycodes
+{
+    MY_BALL_SAFE_RANGE = SAFE_RANGE + 200 - 64,
+    L_OBL_I, L_OBL_D, R_OBL_I, R_OBL_D,
+    MY_BALL_SAFE_RANGE_END,
+
+    /* TODO
+    MY_CONFIG_SAFE_RANGE = SAFE_RANGE + 250 - 64,
+    ORTHO_SCROLL, DEBUG_KC,
+    MY_CONFIG_SAFE_RANGE_END,
+    // ORTHO_SCROLLはマウス側
+    */
+};
+
 // トラックボールの定数、変数
 #define CPI_OPTIONS {800, 1100, 1400, 1500, 1600, 1900, 2200}
 #define CPI_DEFAULT 3
-#define ANGLE_OPTIONS { 70, 80, 90, 160, 170, 180, 250, 260, 270, 340, 350, 360}
-#define ANGLE_DEFAULT 2
+#define ANGLE_OPTIONS { \
+      0,  10,  20,  30,  40,  50,  60,  70,  80, \
+     90, 100, 110, 120, 130, 140, 150, 160, 170, \
+    180, 190, 200, 210, 220, 230, 240, 250, 260, \
+    270, 280, 290, 300, 310, 320, 330, 340, 350, \
+}
+#define ANGLE_DEFAULT 31
+#define OBLIQUE_DEFAULT 5
 #define CPI_OPTION_SIZE (sizeof(cpi_array) / sizeof(uint16_t))
 #define ANGLE_OPTION_SIZE (sizeof(angle_array) / sizeof(uint16_t))
 #define SCROLL_DIVISOR 150.0
@@ -40,11 +61,14 @@ typedef union
     struct
     {
         uint8_t cpi_idx         :4;
-        uint8_t angle_idx       :5;
+        uint8_t angle_idx       :6;
         bool inv                :1;
         bool scmode             :1;
         bool inv_sc             :1;
         bool auto_mouse         :1;
+        uint8_t oblique_idx     :6;
+        bool ortho_scroll       :1;
+        bool kc_debug           :1;
     };
 } ballconfig_t;
 // clang-format on
@@ -58,6 +82,8 @@ float scroll_accumulated_v;
 uint8_t pre_layer;
 uint8_t cur_layer;
 bool oled_mode;
+
+static uint16_t prev_kc = 0;
 
 // ジョイスティックの定数、変数
 #define OFFSET 300
@@ -83,6 +109,9 @@ void eeconfig_init_user(void)
     ballconfig.scmode = false;
     ballconfig.inv_sc = false;
     ballconfig.auto_mouse = true;
+    ballconfig.oblique_idx = OBLIQUE_DEFAULT;
+    ballconfig.ortho_scroll = false;
+    ballconfig.kc_debug = false;
     eeconfig_update_user(ballconfig.raw);
 }
 
@@ -121,26 +150,36 @@ void keyboard_post_init_user(void)
     set_auto_mouse_enable(ballconfig.auto_mouse);
 }
 
+// スクロールレイヤーかを判定する。
+static bool isScrollLayer(void)
+{
+    return IS_LAYER_ON(8) || IS_LAYER_ON(9);
+}
+
 // カーソル調整
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report)
 {
-    double rad = angle_array[ballconfig.angle_idx] * (M_PI / 180) * -1;
-    int8_t x_rev = +mouse_report.x * cos(rad) - mouse_report.y * sin(rad);
-    int8_t y_rev = +mouse_report.x * sin(rad) + mouse_report.y * cos(rad);
+    double theta = angle_array[ballconfig.angle_idx] * (M_PI / 180);
+    double phi = angle_array[ballconfig.oblique_idx] * (M_PI / 180);
+    int8_t x_rev = +mouse_report.x * cos(theta) + mouse_report.y * cos(phi);
+    int8_t y_rev = +mouse_report.x * sin(theta) + mouse_report.y * sin(phi);
 
     if (ballconfig.inv)
     {
         x_rev = -1 * x_rev;
     }
-    if (scrolling || ballconfig.scmode)
+    if ((isScrollLayer() != scrolling) || ballconfig.scmode)
     {
-        if (abs(x_rev) > abs(y_rev))
+        if (ballconfig.ortho_scroll)
         {
-            y_rev = 0;
-        }
-        else
-        {
-            x_rev = 0;
+            if (abs(x_rev) > abs(y_rev))
+            {
+                y_rev = 0;
+            }
+            else
+            {
+                x_rev = 0;
+            }
         }
 
         mouse_report.h = x_rev;
@@ -173,6 +212,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report)
 // キースキャン関係
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
+    prev_kc = keycode;
     if (keycode == CPI_I && record->event.pressed)
     {
         ballconfig.cpi_idx = ballconfig.cpi_idx + 1;
@@ -210,6 +250,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     if (keycode == R_ANG_D && record->event.pressed)
     {
         ballconfig.angle_idx = (ANGLE_OPTION_SIZE + ballconfig.angle_idx - 1) % ANGLE_OPTION_SIZE;
+        eeconfig_update_user(ballconfig.raw);
+    }
+    if (keycode == L_OBL_I && record->event.pressed)
+    {
+        ballconfig.oblique_idx = (ballconfig.oblique_idx + 1) % ANGLE_OPTION_SIZE;
+        eeconfig_update_user(ballconfig.raw);
+    }
+    if (keycode == L_OBL_D && record->event.pressed)
+    {
+        ballconfig.oblique_idx = (ANGLE_OPTION_SIZE + ballconfig.oblique_idx - 1) % ANGLE_OPTION_SIZE;
+        eeconfig_update_user(ballconfig.raw);
+    }
+    if (keycode == R_OBL_I && record->event.pressed)
+    {
+        ballconfig.oblique_idx = (ballconfig.oblique_idx + 1) % ANGLE_OPTION_SIZE;
+        eeconfig_update_user(ballconfig.raw);
+    }
+    if (keycode == R_OBL_D && record->event.pressed)
+    {
+        ballconfig.oblique_idx = (ANGLE_OPTION_SIZE + ballconfig.oblique_idx - 1) % ANGLE_OPTION_SIZE;
         eeconfig_update_user(ballconfig.raw);
     }
     if (keycode == R_INV && record->event.pressed)
@@ -1257,6 +1317,8 @@ bool oled_task_user(void)
             oled_set_cursor(0, 1);
             oled_write_P(PSTR("ANGLE: "), false);
             oled_write(get_u16_str(angle_array[ballconfig.angle_idx], ' '), false);
+            oled_write_P(PSTR("/"), false);
+            oled_write(get_u16_str(angle_array[ballconfig.oblique_idx], ' '), false);
 
             oled_set_cursor(0, 2);
             oled_write_P(PSTR("INV AXIS:"), false);
@@ -1281,11 +1343,16 @@ bool oled_task_user(void)
             oled_write_P(PSTR("INV SCRL:"), false);
             if (ballconfig.inv_sc)
             {
-                oled_write_P(PSTR("YES"), false);
+                oled_write_P(PSTR("YES "), false);
             }
             else
             {
-                oled_write_P(PSTR(" NO"), false);
+                oled_write_P(PSTR(" NO "), false);
+            }
+
+            if (ballconfig.kc_debug)
+            {
+                oled_write(get_u16_str(prev_kc, ' '), false);
             }
         }
     }
@@ -1315,8 +1382,9 @@ bool is_mouse_record_kb(uint16_t keycode, keyrecord_t *record)
         return true;
     case BALL_SAFE_RANGE ... OLED_MOD:
         return true;
+    case MY_BALL_SAFE_RANGE ... MY_BALL_SAFE_RANGE_END:
+        return true;
     default:
-        break;
+        return is_mouse_record_user(keycode, record);
     }
-    return is_mouse_record_user(keycode, record);
 }
